@@ -22,7 +22,7 @@ end
 
 rule '.js' => '.coffee' do |t|
    puts "COFFEE #{t.source}"
-   sh 'coffee', '-c', t.source, t.name
+   sh 'coffee', '-c', t.source
 end
 
 desc "Build all HTML, CSS and JavaScript files"
