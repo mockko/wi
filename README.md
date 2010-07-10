@@ -56,10 +56,10 @@ Hacking
 Prerequisites:
 
 * rake
-* ruby-haml
 * less.js
 * coffeescript [trunk]
 * nodejs [< 0.1.97]
 * ruby-fssm (for 'rake watch')
+* ruby-haml (for demo)
 
 Run `rake` to build once or `rake watch` to build continuously. See `rake -T` for more tasks.
