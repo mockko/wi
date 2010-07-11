@@ -26,8 +26,9 @@ class WiSlider
         this.max:   parseFloat(node.getAttribute('data-wi-max') || '100')
         this.value: parseFloat(node.getAttribute('data-wi-value') || '50')
 
-        for eventName in ['mousedown', 'mousemove', 'mouseup', 'mouseout', 'touchstart', 'touchmove', 'touchend', 'touchcancel']
+        for eventName in ['mousedown', 'mousemove', 'mouseup', 'mouseout', 'touchmove', 'touchend', 'touchcancel']
             this.node.addEventListener eventName, this, false
+        this.knob.addEventListener 'touchstart', this, false
 
         this.node.wi: this
         this.layout()
@@ -83,13 +84,18 @@ class WiSlider
     touchstart: (event) ->
         this.startX: event.targetTouches[0].pageX
         this.startValue: this.value
+        this.dragging: yes
+        event.preventDefault()  # avoid scrolling
 
     touchmove: (event) ->
-        this.moveKnobTo event.targetTouches[0].pageX
+        if this.dragging
+            this.moveKnobTo event.targetTouches[0].pageX
     
     touchend: (event) ->
+        this.dragging: no
     
     touchcancel: (event) ->
+        this.dragging: no
 
 
 hookSliders: ->
