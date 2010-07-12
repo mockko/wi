@@ -58,7 +58,7 @@ Prerequisites:
 * rake
 * less.js
 * coffeescript [trunk]
-* nodejs [< 0.1.97]
+* nodejs [>= 0.1.99]
 * ruby-fssm (for 'rake watch')
 * ruby-haml (for demo)
 
