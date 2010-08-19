@@ -1,0 +1,107 @@
+#! /usr/bin/env ruby
+require 'fileutils'
+require 'optparse'
+
+class Generator
+  def initialize path
+    @path = path
+  end
+
+  def mkdir relative_path
+    dir_path = path_to(relative_path)
+    if File.directory?(dir_path)
+      puts "   DIR #{relative_path}"
+    else
+      puts " MKDIR #{relative_path}"
+      FileUtils.mkdir_p dir_path
+    end
+  end
+
+  def add_file relative_path, contents
+    file_path = path_to(relative_path)
+    if File.exists?(file_path) && File.read(file_path).strip.size > 0
+      puts "EXISTS #{relative_path}"
+      false
+    else
+      puts " WRITE #{relative_path}"
+      FileUtils.mkdir_p File.dirname(file_path)
+      File.open(file_path, 'w') { |f| f.write contents }
+      true
+    end
+  end
+
+private
+
+  def path_to relative_path
+    File.join(@path, relative_path)
+  end
+end
+
+Config = Struct.new(:add_coffee, :add_images)
+def parse_command_line_config(args)
+    config = Config.new
+    config.add_coffee = false
+    config.add_images = false
+
+    opts = OptionParser.new do |opts|
+        opts.banner = "Usage: scripts/create [options] path/to/widget/+variant"
+
+        opts.separator ""
+        opts.separator "Generation options:"
+
+        opts.on("-j", "--[no-]js", "Generate .coffee") do |v|
+            config.add_coffee = v
+        end
+
+        opts.on("-i", "--[no-]images", "Generate images directory") do |v|
+            config.add_images = v
+        end
+
+        opts.separator ""
+        opts.separator "Common options:"
+
+        opts.on_tail("-h", "--help", "Show this message") do
+            puts opts
+            exit
+        end
+    end
+
+    opts.parse!(args)
+    return config
+end
+
+def run_create
+  config = parse_command_line_config(ARGV)
+  unless ARGV.size == 1
+    puts "Usage: scripts/create comp/path"
+    exit 1
+  end
+  path = ARGV.first
+  top_widget_name = path.split('/').first
+  base_name = 'wi-' + path.gsub('/', '-').gsub('-+', '+').sub('+', '--').gsub('+', '-')
+  class_name = 'wi-' + path.gsub('/', '-').sub(/-\+.*$/, '')
+
+  syns = { 'backgrounds' => 'bg' }
+  syns.each { |long, short| class_name.gsub! "wi-#{long}-", "wi-#{short}-"}
+
+  generator = Generator.new(File.dirname(File.dirname(__FILE__)))
+
+  widget_dir = File.join('widgets', path)
+  demo_dir = 'demo'
+
+  if config.add_images
+      generator.mkdir File.join(widget_dir, 'images')
+      generator.mkdir File.join(widget_dir, 'images.src')
+  end
+  generator.add_file File.join(widget_dir, "#{base_name}.less"), ".#{class_name} {\n\n}\n"
+  if config.add_coffee
+    generator.add_file File.join(widget_dir, "#{base_name}.coffee"), "$('.#{class_name}').each ->\n"
+  end
+
+  if generator.add_file File.join(demo_dir, "demo-#{top_widget_name}.haml"), "\n"
+      generator.add_file File.join(demo_dir, "demo-#{top_widget_name}.less"), "\n"
+      generator.add_file File.join(demo_dir, "demo-#{top_widget_name}.coffee"), "\n"
+  end
+end
+
+run_create
