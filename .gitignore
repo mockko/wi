@@ -1,4 +1,6 @@
 .DS_Store
-/demo/*.html
-/widgets/*/*.css
-/widgets/*/*.js
+*.html
+*.css
+*.js
+/img
+/src
