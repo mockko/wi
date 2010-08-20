@@ -37,6 +37,11 @@ DEMO_HAML.each do |haml_file|
     less_files = FileList["widgets/#{widget_path}/**/*.less"]
     css_files = less_files.ext('css').to_a
 
+    demo_less = File.join(File.dirname(haml_file), File.basename(haml_file, ".haml") + ".less")
+    if File.exists? demo_less
+        css_files << demo_less.ext('css')
+    end
+
     file html_file => [haml_file, template_file, RAKEFILE] do |t|
         puts "  HAML #{haml_file}"
         output = Haml::Engine.new(File.read(haml_file)).render
