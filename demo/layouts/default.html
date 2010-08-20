@@ -4,8 +4,10 @@
   <title>{{ page.title }}</title>
   <meta content='initial-scale=1.0, user-scalable=no' name='viewport' />
   <link charset='utf-8' href='common.css' media='screen' rel='stylesheet' title='' type='text/css' />
+  <link charset='utf-8' href="wi.css" media='screen' rel='stylesheet' title='' type='text/css' />
+  <script src="wi.js" type="text/javascript" charset="utf-8"> </script>
   {% for stylesheet in page.stylesheets %}
-  <link charset='utf-8' href='{{ stylesheet.url }}' media='screen' rel='stylesheet' title='' type='text/css' />
+  <link charset='utf-8' href="{{ stylesheet.url }}" media='screen' rel='stylesheet' title='' type='text/css' />
   {% endfor %}
 </head>
 <body>
