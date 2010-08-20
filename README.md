@@ -1,33 +1,57 @@
-Wi: Web + Widgets + iPhone
-==========================
+CSS/JS widgets for gorgeous, native-quality iPhone web apps
+===========================================================
 
-Wi is an open-source set of widgets for iPhone and iPad web apps with native look & feel.
+CSS/JavaScript widgets for iPhone/iPad web applications:
 
-We're building it as a rendering target for the [Mockko designer](http://www.mockko.com/), but Wi is meant for all kinds of web applications.
+* Wi.Backgrounds: solid (block, white), striped, alert, action sheet, header (more coming soon)
+
+* Wi.Slider: iPhone slider
+
+Planned:
+
+* Wi.Buttons: many styles of sexy buttons for you to pick from
+
+* Wi.Bars: navigation bar, toolbar, tab bar, custom bars — in grey, black opaque, black translucent and tinted styles
+
+* Wi.TabBar: iPhone-like tab bar
+
+Native quality. No dependencies. Hardware-accelerated animations. Commercial-friendly open-source MIT license. All artwork created in Photoshop specifically for Wi.
+
+This library was created as part of the work on Mockko iPhone Designer (http://www.mockko.com/).
 
 
-Design Goals
-------------
-
-1. Independent widgets: each piece of Wi should be usable on its own without dependencies.
-
-2. Not using any JavaScript library: although I've been using jQuery for all my projects for a long time, it would not really add too much to merit its use in this framework.
-
-3. CSS3 instead of images where possible.
-
-4. Copyright-clean: all images were hand-drawn in Photoshop.
-
-4. Visual designer-friendly.
-
-
-Widgets
+Install
 -------
 
-(TBD.)
+There are 3 variants available currently: `iphone` (to serve to i-devices), `desktop` (to serve when your iPhone app is accessed from a desktop browser) and `mockko` (used by Mockko designer on the desktop, employs images instead of CSS gradients for better scaling behaviour).
+
+Visit [downloads](http://github.com/mockko/wi/downloads), download one of the recent releases, unpack it, drop `wi.iphone.css`, `wi.iphone.js` and `images` subfolder into your app.
+
+Minified and stripped-down versions will be provided soon.
 
 
-Building
---------
+License
+-------
+
+MIT license: basically, you can do whatever you want with the code and artwork.
+
+
+Authors
+-------
+
+* Andrey Tarantsov (andreyvit@gmail.com) — CSS/JS coding
+* Mikhail Gusarov (dottedmag@dottedmag.net) — might get involved some time later
+* Maria Pudova (notmybrain@gmail.com) — artwork
+
+
+Contact
+-------
+
+[@wi_css](http://twitter.com/wi_css/) on Twitter, or e-mail [mockko@mockko.com](mockko@mockko.com).
+
+
+Hacking
+-------
 
 Prerequisites:
 
