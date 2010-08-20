@@ -33,7 +33,7 @@ Minified and stripped-down versions will be provided soon.
 License
 -------
 
-MIT license: basically, you can do whatever you want with the code and artwork.
+MIT license: basically, you can do whatever you want with the code and artwork. See LICENSE for details.
 
 
 Authors
